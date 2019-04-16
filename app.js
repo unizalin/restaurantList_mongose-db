@@ -91,6 +91,18 @@ app.post('/restaurants/:id', (req, res) => {
   });
 });
 
+
+
+app.post('/restaurants/:id/delete', (req, res) => {
+  Restaurant.findById(req.params.id, (err, restaurants) => {
+    if (err) return console.error(err);
+    restaurants.remove(err => {
+      if (error) return console.error(err);
+      return res.redirect('/');
+    });
+  });
+});
+
 app.listen(port, () => {
   console.log(`The express is listening on localhost:${port}.`);
 });
