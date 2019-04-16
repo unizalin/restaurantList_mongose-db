@@ -5,7 +5,6 @@ const RestaurantData = require('../restaurant.json');
 mongoose.connect('mongodb://localhost/restaurants', { useNewUrlParser: true });
 
 const db = mongoose.connection;
-console.log(db);
 
 db.on('error', () => {
   console.log('db Seeder error');
@@ -26,5 +25,6 @@ db.once('open', () => {
       description: data[i].description
     });
   }
+  console.log(Restaurant)
   console.log('db Seeder ok');
 });
