@@ -1,0 +1,81 @@
+<h1 class="restaurant-show-title">{{restaurants.name}}</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="mx-auto px-5">
+      <a class="btn btn-success px-3 mx-3" href="/">返回首頁</a>
+      <a class="btn btn-info px-3 " href="/restaurants/{{restaurants._id}}/edit">Edit</a>
+      <form class="btn">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger px-3" data-toggle="modal"
+          data-target="#trigger-deleteItem-{{restaurants._id}}">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 優化使用者體驗，刪除餐廳-->
+<div class="modal fade" id="trigger-deleteItem-{{restaurants._id}}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary">刪除警示</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="font-weight-light">請問您確定要刪除資料嗎?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+        <form action="/restaurants/{{restaurants._id}}/delete?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger">刪除</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- DataDisplay -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto">
+
+      <p class="mb-2">
+        <span class="text-secondary">
+          <i class="fas fa-utensils pr-2"></i>
+          類別：
+        </span>
+        {{restaurants.category}}
+      </p>
+
+      <p class="mb-2">
+        <span class="text-secondary">
+          <i class="fas fa-map-marker-alt pr-2"></i>
+          地址：
+        </span>
+        {{restaurants.location}}
+        <a href="{{restaurants.google_map}}" class="text-secondary" target="_blank">
+          <i class="fas fa-location-arrow pr-2 fa-xs" id="map"> 地圖 </i>
+        </a>
+      </p>
+
+      <p class="mb-2">
+        <span class="text-secondary">
+          <i class="fas fa-mobile-alt pr-2"></i>
+          電話：
+        </span>
+        {{restaurants.phone}}
+      </p>
+
+      <p class="mb-5">
+        {{restaurants.description}}
+      </p>
+
+      <img class="photo rounded mx-auto d-block mb-5 w-100" src="{{restaurants.image}}" alt="{{restaurants.name}}"
+        style="max-width: 800px;">
+    </div>
+  </div>
+</div>

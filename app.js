@@ -16,17 +16,17 @@ const db = mongoose.connection;
 
 const Restaurant = require('./models/restaurant');
 db.on('error', () => {
-  console.log('db is err')
+  console.log('db is err');
 });
 
 db.once('open', () => {
-  console.log('db is open')
+  console.log('db is open');
 });
 
 app.get('/', (req, res) => {
   Restaurant.find((err, restaurants) => {
     if (err) return console.error(err);
-    return res.render('index', { restaurants: restaurants });
+    return res.render('index', { restaurants });
   });
 });
 
@@ -34,6 +34,13 @@ app.get('/', (req, res) => {
 app.get('/restaurants/new', (req, res) => {
   return res.render('new');
 });
+
+app.get('/restaurants/:id', (req, res) => {
+  Restaurant.findById(req.params.id, (err, restaurants) => {
+    if (err) return console.error(err);
+    return res.render('detail', { restaurants });
+  })
+})
 
 
 
@@ -48,7 +55,7 @@ app.post('/restaurants', (req, res) => {
     phone: req.body.phone,
     google_map: req.body.google_map,
     rating: req.body.rating,
-    description: req.body.description,                       // name 是從 new 頁面 form 傳過來
+    description: req.body.description,
   });
 
   restaurant.save(err => {
