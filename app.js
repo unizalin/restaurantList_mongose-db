@@ -31,10 +31,32 @@ app.get('/', (req, res) => {
 });
 
 
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new');
+});
 
 
 
+app.post('/restaurants', (req, res) => {
+  const restaurant = Restaurant({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    id: req.body.id,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description,                       // name 是從 new 頁面 form 傳過來
+  });
+
+  restaurant.save(err => {
+    if (err) return console.error(err);
+    return res.redirect('/');                        // 新增完成後，將使用者導回首頁
+  });
+});
 
 app.listen(port, () => {
-  console.log(`The express is listening on localhost:${port}.`)
+  console.log(`The express is listening on localhost:${port}.`);
 });
