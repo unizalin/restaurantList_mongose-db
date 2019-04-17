@@ -24,11 +24,16 @@ db.once('open', () => {
 });
 
 app.get('/', (req, res) => {
-  Restaurant.find((err, restaurants) => {
-    if (err) return console.error(err);
-    return res.render('index', { restaurants });
-  });
+  Restaurant.find({})
+    .sort({ name: 'asc' })
+    .exec((err, restaurants) => {
+      if (err) return console.error(err);
+      return res.render('index', { restaurants });
+    })
 });
+
+
+
 
 
 app.get('/restaurants/new', (req, res) => {
