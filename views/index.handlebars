@@ -45,28 +45,28 @@
         </div>
       </div>
     </div>
-    {{/each}}
-  </div>
-  <div class="modal fade" id="trigger-deleteItem-{{restaurants._id}}" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-primary">刪除警示</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p class="font-weight-light">請問您確定要刪除資料嗎?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-          <form action="/restaurants/{{restaurants._id}}/delete" method="POST">
-            <button type="submit" class="btn btn-danger">刪除</button>
-          </form>
+    <div class="modal fade" id="trigger-deleteItem-{{this.id}}" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-primary">刪除警示</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="font-weight-light">請問您確定要刪除 <span class="text-primary font-italic">{{this.name}}</span> 資料嗎?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+            <form action="/restaurants/{{this.id}}/delete" method="POST">
+              <button type="submit" class="btn btn-danger">刪除</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
+    {{/each}}
   </div>
 
 </div>
