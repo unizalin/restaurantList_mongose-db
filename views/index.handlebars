@@ -17,8 +17,20 @@
 </div>
 <!-- search bar -->
 <div class="container mt-5">
-  <div class="text-right">
-    <a href="/restaurants/new" class="btn btn-primary">Create</a>
+  <div class="d-flex justify-content-end my-3">
+    <div>
+      <a href="/restaurants/new" class="btn btn-outline-warning">Create</a>
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-outline-success dropdown-toggle font-italic" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">排序方式</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/sort/rating">餐廳評分</a>
+        <a class="dropdown-item" href="/sort/category">餐廳類別</a>
+        <a class="dropdown-item" href="/sort/asc">A > Z (升冪)</a>
+        <a class="dropdown-item" href="/sort/desc">Z > A (降冪)</a>
+      </div>
+    </div>
   </div>
   <div class="row">
     {{#each restaurants}}
