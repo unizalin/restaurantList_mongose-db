@@ -4,6 +4,8 @@ const port = 3000;
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+
 mongoose.connect('mongodb://localhost/restaurants', { useNewUrlParser: true });
 
 
@@ -11,6 +13,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 const db = mongoose.connection;
 
@@ -40,7 +43,7 @@ app.get('/restaurants/new', (req, res) => {
   return res.render('new');
 });
 
-app.get('/restaurants/:id', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurants) => {
     if (err) return console.error(err);
     return res.render('detail', { restaurants });
@@ -98,7 +101,7 @@ app.post('/restaurants/:id', (req, res) => {
 
 
 
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id/delete', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurants) => {
     if (err) return console.error(err);
     restaurants.remove(err => {
